@@ -200,52 +200,79 @@ vdmf_test: $(OBJ_VDMF_TEST) $(OBJ_VDMF) $(OBJ_UTIL)
 pe33_test: $(OBJ_PE33_TEST) $(OBJ_PE33) $(OBJ_UTIL)
 	cc -o pe33_test $(OBJ_PE33_TEST) $(OBJ_PE33) $(OBJ_UTIL) -L/lib $(IFLAGS)-I$(IPE33_PTH) $(LFLAGS) 
 
-$(OUTIL_PTH)/%.o: $(SUTIL_PTH)/%.c $(DEPS)
+$(OUTIL_PTH)/%.o: $(SUTIL_PTH)/%.c $(DEPS) |$(OUTIL_PTH)
 	cc -c -o $@ $< $(IFLAGS) $(LFLAGS)
 
-$(OPI1_PTH)/%.o: $(SPI1_PTH)/%.c $(DEPS)
+$(OPI1_PTH)/%.o: $(SPI1_PTH)/%.c $(DEPS) |$(OPI1_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPI1_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/pi1_test.o: $(STEST_PTH)/pi1_test.c
+$(OTEST_PTH)/pi1_test.o: $(STEST_PTH)/pi1_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPI1_PTH) $(LFLAGS)
 
 
-$(OPI2_PTH)/%.o: $(SPI2_PTH)/%.c $(DEPS)
+$(OPI2_PTH)/%.o: $(SPI2_PTH)/%.c $(DEPS) |$(OPI2_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPI2_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/pi2_test.o: $(STEST_PTH)/pi2_test.c
+$(OTEST_PTH)/pi2_test.o: $(STEST_PTH)/pi2_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPI2_PTH) $(LFLAGS)
 
 
-$(OPI3_PTH)/%.o: $(SPI3_PTH)/%.c $(DEPS)
+$(OPI3_PTH)/%.o: $(SPI3_PTH)/%.c $(DEPS) |$(OPI3_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPI3_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/pi3_test.o: $(STEST_PTH)/pi3_test.c
+$(OTEST_PTH)/pi3_test.o: $(STEST_PTH)/pi3_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPI3_PTH) $(LFLAGS)
 
-$(OMVM_PTH)/%.o: $(SMVM_PTH)/%.c $(DEPS)
+$(OMVM_PTH)/%.o: $(SMVM_PTH)/%.c $(DEPS) |$(OMVM_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IMVM_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/mvm_test.o: $(STEST_PTH)/mvm_test.c
+$(OTEST_PTH)/mvm_test.o: $(STEST_PTH)/mvm_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IMVM_PTH) $(LFLAGS)
 
-$(OMM42_PTH)/%.o: $(SMM42_PTH)/%.c $(DEPS)
+$(OMM42_PTH)/%.o: $(SMM42_PTH)/%.c $(DEPS) |$(OMM42_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IMM42_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/mm42_test.o: $(STEST_PTH)/mm42_test.c
+$(OTEST_PTH)/mm42_test.o: $(STEST_PTH)/mm42_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IMM42_PTH) $(LFLAGS)
 
-$(OVDMF_PTH)/%.o: $(SVDMF_PTH)/%.c $(DEPS)
+$(OVDMF_PTH)/%.o: $(SVDMF_PTH)/%.c $(DEPS) |$(OVDMF_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IVDMF_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/vdmf_test.o: $(STEST_PTH)/vdmf_test.c
+$(OTEST_PTH)/vdmf_test.o: $(STEST_PTH)/vdmf_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IVDMF_PTH) $(LFLAGS)
 
-$(OPE33_PTH)/%.o: $(SPE33_PTH)/%.c $(DEPS)
+$(OPE33_PTH)/%.o: $(SPE33_PTH)/%.c $(DEPS) |$(OPE33_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPE33_PTH) $(LFLAGS)
 
-$(OTEST_PTH)/pe33_test.o: $(STEST_PTH)/pe33_test.c
+$(OTEST_PTH)/pe33_test.o: $(STEST_PTH)/pe33_test.c |$(OTEST_PTH)
 	cc -c -o $@ $< $(IFLAGS)-I$(IPE33_PTH) $(LFLAGS)
+
+$(OUTIL_PTH):
+	mkdir -p $@
+
+$(OTEST_PTH):
+	mkdir -p $@
+
+$(OPI1_PTH):
+	mkdir -p $@
+
+$(OPI2_PTH):
+	mkdir -p $@
+
+$(OPI3_PTH):
+	mkdir -p $@
+
+$(OMVM_PTH):
+	mkdir -p $@
+
+$(OMM42_PTH):
+	mkdir -p $@
+
+$(OVDMF_PTH):
+	mkdir -p $@
+
+$(OPE33_PTH):
+	mkdir -p $@
 
 .PHONY : clean
  clean:
